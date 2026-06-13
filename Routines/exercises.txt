@@ -1,0 +1,48 @@
+Exercise 1 – Predict the Output
+Snippet A (Java/C++)
+cppvoid f(int a, int &b) { a = 2; b = 3; }
+int x = 1, y = 1;
+f(x, y);
+print(x, y);
+
+a is pass-by-value (copy) → x unaffected, stays 1
+b is pass-by-reference (&b) → y becomes 3
+Output: x = 1, y = 3
+
+Snippet B (C)
+cvoid g(int *p, int q) { *p = 10; q = 20; }
+int m = 5, n = 5;
+g(&m, n);
+
+p is a pointer → dereferencing modifies m directly → m = 10
+q is pass-by-value → n unaffected → n = 5
+Output: m = 10, n = 5
+
+Snippet C (pseudocode, value-result)
+procedure h(c: IN OUT Integer, d: IN OUT Integer)
+begin
+  c := c + 1;
+  d := d + 1;
+end;
+a := 2; b := 2;
+h(a, a);  // same variable twice
+print a, b;
+
+Copy-in: c = 2, d = 2 (both independent copies of a)
+Local execution: c = 3, d = 3
+Copy-out (in order): first c writes 3 → a = 3; then d writes 3 → a = 3 again
+b was never touched → b = 2
+Output: a = 3, b = 2
+
+Snippet D (Python)
+pythondef modify(lst, num):
+    lst.append(4)
+    num = 100
+
+my_list = [1,2,3]
+x = 7
+modify(my_list, x)
+print(my_list, x)
+
+
+Output: [1, 2, 3, 4] 7
